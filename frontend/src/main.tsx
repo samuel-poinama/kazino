@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import App from "./App.tsx";
 import './index.css'
-import Login from "./components/login.tsx";
+// import Login from "./components/login.tsx";
 
 const root = document.getElementById("root");
 
@@ -12,7 +12,7 @@ if (root) {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
         {/* <Route path="/register" element={<Register />} /> */}
       </Routes>
     </BrowserRouter>
