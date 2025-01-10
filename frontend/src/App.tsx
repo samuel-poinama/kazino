@@ -3,7 +3,7 @@ import './App.css'
 function App() {
 
   return (
-    <div className="h-screen w-screen bg-[url('public/file.jpg')] bg-cover bg-center flex flex-col justify-between">
+    <div className="h-screen w-screen bg-[url('public/BG.png')] bg-cover bg-center flex flex-col justify-between">
       {/* Conteneur centré */}
       <div className="flex-grow flex items-center justify-center">
         <div
@@ -11,7 +11,7 @@ function App() {
           onClick={handleClick}
         >
           <img
-            src="/public/chip.jpg"
+            src="/public/chip.png"
             alt="Placeholder"
             className="w-20 h-20 sm:w-28 sm:h-28 lg:w-32 lg:h-32 object-contain"
           />
