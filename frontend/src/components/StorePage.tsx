@@ -5,10 +5,9 @@ const StorePage = ({ isOpen, onClose }) => {
   const [selectedItem, setSelectedItem] = useState(null);
 
   const products = [
-    { id: 1, name: "Auto Miner", description: "Mines automatically.", price: 1500, image: "placeholder.png" },
-    { id: 2, name: "Double LXP", description: "Earn double points!", price: 2000, image: "placeholder.png" },
-    { id: 3, name: "Golden Skin", description: "Exclusive golden theme.", price: 2500, image: "placeholder.png" },
-    { id: 4, name: "Speed Boost", description: "Click faster!", price: 1200, image: "placeholder.png" },
+    { id: 1, name: "Auto Miner", description: "Mines automatically.", price: 1500, image: "Cchip.svg" },
+    { id: 2, name: "Double LXP", description: "Earn double points!", price: 2000, image: "Cstonk.svg" },
+    { id: 3, name: "Speed Boost", description: "Click faster!", price: 1200, image: "Cblock.svg" },
   ];
 
   const openModal = (item) => {
@@ -38,14 +37,16 @@ const StorePage = ({ isOpen, onClose }) => {
       onClick={closeModal}
     >
       <div
-        className="bg-blue-800 p-6 rounded-lg shadow-md w-11/12 max-w-md relative"
+        className="bg-blue-800 p-8 rounded-lg shadow-lg w-4/5 h-4/5 relative overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <header className="p-4 bg-blue-800 shadow-md flex justify-between items-center">
-          <h1 className="text-xl font-bold">Autoclicker Store</h1>
-          <div className="text-lg">LXP Balance: <span className="font-bold">{balance}</span></div>
+        <header className="p-4 bg-blue-900 shadow-md flex justify-between items-center rounded-md">
+          <h1 className="text-2xl font-bold text-white">Autoclicker Store</h1>
+          <div className="text-lg text-white">
+            LXP Balance: <span className="font-bold">{balance}</span>
+          </div>
         </header>
-        <main className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <main className="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {products.map((product) => (
             <div
               key={product.id}
@@ -55,9 +56,9 @@ const StorePage = ({ isOpen, onClose }) => {
                 alt={product.name}
                 className="w-24 h-24 object-cover mb-4"
               />
-              <h2 className="text-lg font-bold mb-2">{product.name}</h2>
+              <h2 className="text-lg font-bold text-white mb-2">{product.name}</h2>
               <p className="text-sm text-gray-300 mb-2">{product.description}</p>
-              <p className="text-lg font-bold mb-4">{product.price} LXP</p>
+              <p className="text-lg font-bold text-white mb-4">{product.price} LXP</p>
               <button
                 onClick={() => openModal(product)}
                 className="bg-teal-500 hover:bg-teal-600 text-white py-2 px-4 rounded-md">
@@ -68,11 +69,15 @@ const StorePage = ({ isOpen, onClose }) => {
         </main>
 
         {selectedItem && (
-          <div className="mt-4">
-            <h2 className="text-xl font-bold mb-4">{selectedItem.name}</h2>
+          <div className="mt-4 bg-blue-700 p-4 rounded-lg">
+            <h2 className="text-xl font-bold text-white mb-4">{selectedItem.name}</h2>
             <p className="text-gray-300 mb-4">{selectedItem.description}</p>
-            <p className="mb-4">Price: <span className="font-bold">{selectedItem.price} LXP</span></p>
-            <p className="mb-4">Your Balance: <span className="font-bold">{balance} LXP</span></p>
+            <p className="mb-4 text-white">
+              Price: <span className="font-bold">{selectedItem.price} LXP</span>
+            </p>
+            <p className="mb-4 text-white">
+              Your Balance: <span className="font-bold">{balance} LXP</span>
+            </p>
             <div className="flex justify-end gap-4">
               <button
                 onClick={closeModal}
