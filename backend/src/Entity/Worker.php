@@ -6,12 +6,18 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\WorkerRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\MetaData\Get;
 use App\State\BuyProcessor;
 use App\Dto\BuyRequest;
+use App\State\WorkerProvider;
 
 #[ORM\Entity(repositoryClass: WorkerRepository::class)]
 #[ApiResource(
     operations: [
+        new Get(
+            uriTemplate: '/workers',
+            provider: WorkerProvider::class,            
+        ),
         new Post(
             uriTemplate: '/buy',
             processor: BuyProcessor::class,
