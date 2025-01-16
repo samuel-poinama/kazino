@@ -1,0 +1,71 @@
+<?php
+
+namespace App\Entity;
+
+use ApiPlatform\Metadata\ApiResource;
+use App\Repository\ScoreRepository;
+use Doctrine\DBAL\Types\Types;
+use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\Put;
+use App\State\ScoreDataProvider;
+use App\State\ScoreDataProcessor;
+
+#[ORM\Entity(repositoryClass: ScoreRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(
+            uriTemplate: '/scores',
+            provider: ScoreDataProvider::class,
+        ),
+        new Put(
+            uriTemplate: '/scores',
+            processor: ScoreDataProcessor::class,
+            read: false,
+            write: true,
+            provider: ScoreDataProvider::class,
+        ),
+    ]
+)]
+class Score
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column]
+    private ?int $id = null;
+
+    #[ORM\Column(type: Types::BIGINT)]
+    private ?string $points = null;
+
+    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    private ?User $user = null;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getPoints(): ?string
+    {
+        return $this->points;
+    }
+
+    public function setPoints(string $points): static
+    {
+        $this->points = $points;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+}

@@ -57,4 +57,15 @@ class UserRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findOneByUser($user): ?Score
+    {
+        $userId = $user->getId();
+        return $this->createQueryBuilder('score')
+            ->andWhere('score.user_id = :userId')
+            ->setParameter('userId', $userId)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
