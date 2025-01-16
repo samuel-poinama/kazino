@@ -8,7 +8,9 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use App\State\RegisterStateProcessor;
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\POST; 
+use ApiPlatform\Metadata\POST;
+use ApiPlatform\Metadata\GET;
+use App\State\UserDataProvider;
 
 #[ApiResource(
     operations: [
@@ -17,7 +19,12 @@ use ApiPlatform\Metadata\POST;
             processor: RegisterStateProcessor::class,
             read: false,
             write: true,
-        )
+        ),
+        new GET(
+            uriTemplate: '/me',
+            provider: UserDataProvider::class,
+            read: true,
+        ),
     ]
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
