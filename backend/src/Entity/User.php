@@ -6,7 +6,20 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\State\RegisterStateProcessor;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\POST; 
 
+#[ApiResource(
+    operations: [
+        new POST(
+            uriTemplate: '/register',
+            processor: RegisterStateProcessor::class,
+            read: false,
+            write: true,
+        )
+    ]
+)]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
