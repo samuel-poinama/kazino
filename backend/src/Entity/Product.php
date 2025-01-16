@@ -16,6 +16,10 @@ use App\State\ProductDataProvider;
             uriTemplate: '/products',
             provider: ProductDataProvider::class,
         ),
+        new Get(
+            uriTemplate: '/products/{id}',
+            provider: ProductDataProvider::class,
+        ),
     ]
 )]
 class Product

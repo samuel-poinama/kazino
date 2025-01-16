@@ -22,15 +22,21 @@ class ProductDataProvider implements ProviderInterface
 
     public function provide(Operation $operation, array $uriVariables = [], array $context = []): object|array|null
     {
-        $token = $this->tokenStorage->getToken();
+        if (sizeof($uriVariables) == 0) {
+            $token = $this->tokenStorage->getToken();
 
-        if ($token) {
-            $user = $token->getUser();
-            
-            if ($user) {
-                $products = $this->entityManager->getRepository(Product::class)->getAll($user);
-                return $products;
+            if ($token) {
+                $user = $token->getUser();
+                
+                if ($user) {
+                    $products = $this->entityManager->getRepository(Product::class)->getAll($user);
+                    return $products;
+                }
             }
+        } else {
+            $id = $uriVariables['id'];
+            $product = $this->entityManager->getRepository(Product::class)->getById($id);
+            return $product;
         }
     }
 }
