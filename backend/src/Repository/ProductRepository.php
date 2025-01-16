@@ -48,4 +48,13 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    public function getById(int $id): ?Product
+    {
+        return $this->createQueryBuilder('product')
+            ->andWhere('product.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
