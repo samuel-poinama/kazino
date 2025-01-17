@@ -32,11 +32,10 @@ class WorkerProvider implements ProviderInterface
                 // get worker by user id
                 $workers = $this->entityManager->getRepository(Worker::class)->findByUserId($userId);
 
-                // parse workers to array [id, product_id]
                 return array_map(function($worker) {
                     return [
                         'id' => $worker->getId(),
-                        'product_id' => $worker->getProduct()->getId()
+                        'product_id' => $worker->getProduct()
                     ];
                 }, $workers);
             }
