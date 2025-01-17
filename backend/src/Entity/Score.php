@@ -16,12 +16,12 @@ use App\Dto\ScoreResponse;
 #[ApiResource(
     operations: [
         new Get(
-            uriTemplate: '/scores',
+            uriTemplate: '/score',
             provider: ScoreDataProvider::class,
             output: ScoreResponse::class
         ),
         new Put(
-            uriTemplate: '/scores',
+            uriTemplate: '/score/add',
             processor: ScoreDataProcessor::class,
             read: false,
             write: true,
