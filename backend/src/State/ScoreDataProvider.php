@@ -29,6 +29,7 @@ class ScoreDataProvider implements ProviderInterface
                 // Assuming the user object has a method getId() to get the user ID
                 $userId = $user->getId();
                 $score = $this->scoreRepository->findOneByUser($user);
+                
                 return [
                     'id' => $score->getId(),
                     'points' => $score->getPoints(),

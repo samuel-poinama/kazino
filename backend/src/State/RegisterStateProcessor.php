@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProcessorInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use App\Entity\Score;
 
 class RegisterStateProcessor implements ProcessorInterface
 {
@@ -34,6 +35,15 @@ class RegisterStateProcessor implements ProcessorInterface
 
         // persist the user
         $this->entityManager->persist($data);
+        $this->entityManager->flush();
+
+        // create a score for the user
+        $score = new Score();
+        $score->setUser($data);
+        $score->setPoints(0);
+
+        // persist the score
+        $this->entityManager->persist($score);
         $this->entityManager->flush();
     }
 }
