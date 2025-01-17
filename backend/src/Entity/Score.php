@@ -11,6 +11,8 @@ use ApiPlatform\Metadata\Put;
 use App\State\ScoreDataProvider;
 use App\State\ScoreDataProcessor;
 use App\Dto\ScoreResponse;
+use App\State\BoardProvider;
+use App\Dto\BoardResponse;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
 #[ApiResource(
@@ -27,6 +29,11 @@ use App\Dto\ScoreResponse;
             write: true,
             provider: ScoreDataProvider::class,
         ),
+        new Get(
+            uriTemplate: '/leaderboard',
+            provider: BoardProvider::class,
+            output: BoardResponse::class
+        )
     ]
 )]
 class Score

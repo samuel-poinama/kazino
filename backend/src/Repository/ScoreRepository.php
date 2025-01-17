@@ -27,4 +27,14 @@ class ScoreRepository extends ServiceEntityRepository
                 ->getOneOrNullResult()
             ;
         }
+
+
+        public function getFirst($limit): array
+        {
+            return $this->createQueryBuilder('score')
+            ->orderBy('score.points', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+        }
 }
