@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use App\Entity\Worker;
 use App\Entity\Product;
+use App\Entity\Score;
 
 
 class BuyProcessor implements ProcessorInterface
@@ -29,14 +30,25 @@ class BuyProcessor implements ProcessorInterface
             $user = $token->getUser();
 
             if ($user) {
-                $worker = new Worker();
-                $worker->setUser($user);
-                
                 // get product Id from body
                 $productId = $data->productId;
 
                 // get product by Id
                 $product = $this->entityManager->getRepository(Product::class)->getById($productId);
+
+                $price = $product->getPrice();
+
+                $score = $this->entityManager->getRepository(Score::class)->findOneByUser($user);
+                $points = $score->getPoints();
+                if ($points < $price) return;
+
+                $score->setPoints($points - $price);
+                $this->entityManager->persist($score);
+
+                $worker = new Worker();
+                $worker->setUser($user);
+                
+                
 
                 // set product to worker
                 $worker->setProduct($product);
