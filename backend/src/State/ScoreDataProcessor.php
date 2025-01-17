@@ -51,7 +51,6 @@ class ScoreDataProcessor implements ProcessorInterface
                 }
             }
         }
-        // Assuming $data is an instance of Score
         
     }
 }
