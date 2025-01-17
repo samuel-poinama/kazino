@@ -1,21 +1,33 @@
 import React, { useState } from "react";
 import '../App.css'
 
-const Login = () => {
+const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission logic here
-    console.log("Username: ", username);
-    console.log("Password: ", password);
+    console.log("Submitting:", { username, password });
+    try {
+      const response = await fetch('http://localhost:8000/api/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      console.log("Response status:", response.status);
+      const data = await response.json();
+      console.log("Response data:", data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <div className="flex justify-center items-center h-screen bg-gray-900">
       <div className="card w-[300px] p-6 text-center bg-[#2a2b38] rounded-lg">
-        <p className="title text-2xl font-medium text-white mb-4">Log In!</p>
+        <p className="title text-2xl font-medium text-white mb-4">Register!</p>
         <form onSubmit={handleSubmit}>
           <div className="field mb-4 flex items-center justify-center gap-2 bg-[#1f2029] rounded-md p-3">
             <svg
@@ -47,8 +59,8 @@ const Login = () => {
             </svg>
             <input
               type="password"
-              name="logpass"
-              id="logpass"
+              name="password"
+              id="password"
               className="input-field bg-transparent border-none outline-none text-gray-300 w-full"
               placeholder="Password"
               value={password}
@@ -61,21 +73,15 @@ const Login = () => {
             type="submit"
             className="btn w-full p-2 bg-[#ffeba7] text-[#5e6681] text-sm font-bold uppercase rounded-md shadow-lg hover:bg-[#5e6681] hover:text-[#ffeba7] transition duration-300"
           >
-            Login
+            Register
           </button>
           
           <div className="text-left flex flex-col mt-4 text-sm">
             <a
-              href="register"
+              href="login"
               className="btn-link text-gray-300 mb-1 hover:text-[#ffeba7] transition duration-300"
             >
-              Don't have an account yet?
-            </a>
-            <a
-              href="forgot-password"
-              className="btn-link text-gray-300 hover:text-[#ffeba7] transition duration-300"
-            >
-              Forgot your password?
+              Already have an account?
             </a>
           </div>
         </form>
@@ -84,4 +90,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
