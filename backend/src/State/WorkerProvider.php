@@ -35,7 +35,7 @@ class WorkerProvider implements ProviderInterface
                 return array_map(function($worker) {
                     return [
                         'id' => $worker->getId(),
-                        'product_id' => $worker->getProduct()
+                        'product' => $worker->getProduct()
                     ];
                 }, $workers);
             }

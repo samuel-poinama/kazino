@@ -10,13 +10,15 @@ use ApiPlatform\MetaData\Get;
 use App\State\BuyProcessor;
 use App\Dto\BuyRequest;
 use App\State\WorkerProvider;
+use App\Dto\WorkerResponse;
 
 #[ORM\Entity(repositoryClass: WorkerRepository::class)]
 #[ApiResource(
     operations: [
         new Get(
             uriTemplate: '/workers',
-            provider: WorkerProvider::class,            
+            provider: WorkerProvider::class,   
+            output: WorkerResponse::class,
         ),
         new Post(
             uriTemplate: '/buy',

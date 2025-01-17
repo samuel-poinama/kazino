@@ -29,7 +29,8 @@ class UserDataProvider implements ProviderInterface
                 // Assuming the user object has a method getId() to get the user ID
                 $userId = $user->getId();
                 return [
-                    'username' => $user->getUsername(),
+                    'id' => $userId,
+                    'username' => $user->getUsername()
                 ];
             }
         }

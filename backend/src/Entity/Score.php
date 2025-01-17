@@ -10,6 +10,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\Put;
 use App\State\ScoreDataProvider;
 use App\State\ScoreDataProcessor;
+use App\Dto\ScoreResponse;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
 #[ApiResource(
@@ -17,6 +18,7 @@ use App\State\ScoreDataProcessor;
         new Get(
             uriTemplate: '/scores',
             provider: ScoreDataProvider::class,
+            output: ScoreResponse::class
         ),
         new Put(
             uriTemplate: '/scores',

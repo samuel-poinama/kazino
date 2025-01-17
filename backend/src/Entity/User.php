@@ -11,6 +11,9 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\POST;
 use ApiPlatform\Metadata\GET;
 use App\State\UserDataProvider;
+use App\Dto\CredentialsRequest;
+use App\Dto\CredentialsResponse;
+use App\Dto\ProfileResponse;
 
 #[ApiResource(
     operations: [
@@ -19,11 +22,14 @@ use App\State\UserDataProvider;
             processor: RegisterStateProcessor::class,
             read: false,
             write: true,
+            input: CredentialsRequest::class,
+            output: CredentialsResponse::class
         ),
         new GET(
             uriTemplate: '/me',
             provider: UserDataProvider::class,
             read: true,
+            output: ProfileResponse::class
         ),
     ]
 )]
