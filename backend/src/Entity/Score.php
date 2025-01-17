@@ -13,6 +13,7 @@ use App\State\ScoreDataProcessor;
 use App\Dto\ScoreResponse;
 use App\State\BoardProvider;
 use App\Dto\BoardResponse;
+use App\Dto\ScoreRequest;
 
 #[ORM\Entity(repositoryClass: ScoreRepository::class)]
 #[ApiResource(
@@ -24,6 +25,7 @@ use App\Dto\BoardResponse;
         ),
         new Put(
             uriTemplate: '/score/add',
+            input: ScoreRequest::class,
             processor: ScoreDataProcessor::class,
             read: false,
             write: true,

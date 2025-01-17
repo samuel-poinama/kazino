@@ -31,9 +31,8 @@ class ScoreDataProcessor implements ProcessorInterface
             if ($user) {
 
 
-                if ($data->getPoints()) {
-                    $data->setUser($user);
-                    $points = $data->getPoints();
+                if ($data->points) {
+                    $points = $data->points;
 
                     $score = $this->entityManager->getRepository(Score::class)->findOneByUser($user);
 

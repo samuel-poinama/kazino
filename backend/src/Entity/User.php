@@ -10,10 +10,13 @@ use App\State\RegisterStateProcessor;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\POST;
 use ApiPlatform\Metadata\GET;
+use ApiPlatform\Metadata\PUT;
 use App\State\UserDataProvider;
 use App\Dto\CredentialsRequest;
 use App\Dto\CredentialsResponse;
 use App\Dto\ProfileResponse;
+use App\State\ChangePasswordProcessor;
+use App\Dto\ChangePasswordResquest;
 
 #[ApiResource(
     operations: [
@@ -31,6 +34,11 @@ use App\Dto\ProfileResponse;
             read: true,
             output: ProfileResponse::class
         ),
+        new PUT(
+            uriTemplate: '/change-password',
+            processor: ChangePasswordProcessor::class,
+            input: ChangePasswordResquest::class
+        )
     ]
 )]
 #[ORM\Entity(repositoryClass: UserRepository::class)]
